@@ -199,9 +199,10 @@ export default function Login() {
 							/>
 							<Form.Error>{error?.password}</Form.Error>
 						</Form.Label>
+						<Form.Error>{error?.server}</Form.Error>
 						<Form.Submit disabled={!formIsValid() || loading} type="submit">
 							{loading && <Form.Indicator className="fa fa-refresh fa-spin" />}
-							<Form.Error>{error?.server}</Form.Error>
+
 							<span>Login</span>
 						</Form.Submit>
 					</Form.Base>
