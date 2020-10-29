@@ -3,7 +3,6 @@ import styled from 'styled-components/macro';
 export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	min-height: 660px;
 	background-color: rgba(0, 0, 0, 0.75);
 	border-radius: 5px;
 	box-sizing: border-box;

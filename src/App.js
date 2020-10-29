@@ -1,4 +1,4 @@
-// import './App.css';
+import './App.css';
 import { Login, Home, NotFound } from './pages';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ function App() {
 	return (
 		<div className="App">
 			<AuthContextProvider>
-				<BrowserRouter>
+				<BrowserRouter forceRefresh={true}>
 					<Switch>
 						<IsUserRedirect exact path={ROUTES.LOGIN} component={Login} />
 						<PrivateRoute exact path={ROUTES.BROWSE} component={Home} />

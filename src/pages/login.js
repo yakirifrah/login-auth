@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Form } from '../components';
 import styled from 'styled-components/macro';
-
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Login() {
+	const history = useHistory();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [loading, setLoading] = useState(false);
@@ -27,6 +28,7 @@ export default function Login() {
 				if (token) {
 					localStorage.setItem('token', JSON.stringify(token));
 				}
+				history.push('/browse');
 			} catch (error) {
 				setError((prevError) => {
 					return {
@@ -202,13 +204,11 @@ export default function Login() {
 						<Form.Error>{error?.server}</Form.Error>
 						<Form.Submit disabled={!formIsValid() || loading} type="submit">
 							{loading && <Form.Indicator className="fa fa-refresh fa-spin" />}
-
 							<span>Login</span>
 						</Form.Submit>
 					</Form.Base>
 				</Form>
 			</Wrapper>
-			)}
 		</>
 	);
 }
