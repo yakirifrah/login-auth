@@ -42,12 +42,15 @@ export default function Login() {
 
   const handleChange = (event, type) => {
     event.preventDefault();
-    setError((prevError) => {
-      prevError[type] = '';
-      return {
-        ...prevError,
-      };
-    });
+    if (!setError?.type){
+      setError((prevError) => {
+        prevError[type] = '';
+        return {
+          ...prevError,
+        };
+      });
+    }
+
     type === 'email' ? setEmail(event.target.value) : setPassword(event.target.value);
   };
 
@@ -64,13 +67,9 @@ export default function Login() {
 
   const passwordIsValid = (value = password) => {
     let valid = false;
-    const letterRe = /[A-Za-z]/,
-      numericRe = /[0-9]/,
-      uppercaseRe = /[A-Z]/;
+    const regPassword = /^(?=.*\d)(?=.*[0-9])(?=.*[A-Z])[0-9A-Za-z]{8,30}$/;
     const lengthOfPasswordValid = password.length >= 8 && password.length <= 30;
-    const otherRegValid =
-      letterRe.test(password) && numericRe.test(password) && uppercaseRe.test(password);
-    if (lengthOfPasswordValid && otherRegValid) {
+    if (lengthOfPasswordValid && regPassword.test(password)) {
       valid = true;
     }
     return valid;
@@ -107,10 +106,10 @@ export default function Login() {
         };
       });
     }
-    const letterRe = /[A-Za-z]/,
-      numericRe = /[0-9]/,
+    const patternValid = new RegExp('^\b\w\b$');
+    const numericRe = /[0-9]/,
       uppercaseRe = /[A-Z]/;
-    if (!letterRe.test(password)) {
+    if (!patternValid.test(password)) {
       return setError((prevError) => {
         return {
           ...prevError,
